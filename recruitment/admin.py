@@ -15,8 +15,8 @@ class VacancyDBAdmin(admin.ModelAdmin):
 
 class VacancyDetailsDBAdmin(admin.ModelAdmin):
     list_display = (
-        'sl', 'vacancyNum', 'position', 'shortDescription', 'requirement', 'additionalInformation', 'officeLocation',
-        'lastDate')
+        'CompanyName', 'sl', 'vacancyNum', 'position', 'JobResponsibilities', 'EmploymentStatus', 'EducationalRequirements', 'AdditionalRequirements',
+        'JobLocation', 'salary', 'lastDate')
 
 
 class ApplyDBAdmin(admin.ModelAdmin):

@@ -16,13 +16,16 @@ class VacancyDB(models.Model):
 
 
 class VacancyDetailsDB(models.Model):
+    CompanyName = models.CharField(max_length=50, null=True)
     sl = models.IntegerField(blank=None, null=True)
     vacancyNum = models.IntegerField(blank=None, null=True)
-    position = models.CharField(max_length=250)
-    shortDescription = models.TextField(max_length=500)
-    requirement = models.TextField(max_length=1000)
-    additionalInformation = models.CharField(max_length=200)
-    officeLocation = models.CharField(max_length=100)
+    position = models.CharField(max_length=100, null=True)
+    JobResponsibilities = models.CharField(max_length=250,null=True)
+    EmploymentStatus = models.TextField(max_length=500, null=True)
+    EducationalRequirements = models.TextField(max_length=500, null=True)
+    AdditionalRequirements = models.TextField(max_length=200, null=True)
+    JobLocation = models.CharField(max_length=100, null=True)
+    salary = models.IntegerField(blank=None, null=True)
     lastDate = models.DateTimeField(default=None, null=True)
 
 
