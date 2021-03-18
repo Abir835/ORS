@@ -9,141 +9,87 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <title>Dashboard</title>
     <style>
         /* Progress bar section starts here  */
-.card.card-statistic-1, .card.card-statistic-2 {
-    display: inline-block;
-    width: 100%;
-}
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-    background-color: #fff;
-    border-radius: 3px;
-    border: none;
-    position: relative;
-    margin-top:10px;
-    margin-bottom: 30px;
-    cursor:pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    border:2px solid rgba(212, 214, 212, 0.904);
-}
-.card:hover {
-  background-color: rgb(0 123 255 / 11%);
-}
-.card.card-statistic-1 .card-icon {
-    line-height: 90px;
-}
-.card.card-statistic-1 .card-icon, .card.card-statistic-2 .card-icon {
-    width: 80px;
-    height: 80px;
-    margin: 10px;
-    border-radius: 3px;
-    line-height: 94px;
-    text-align: center;
-    float: left;
-    margin-right: 15px;
-}
-.card.card-statistic-1 .card-body {
-    font-size: 20px;
-}
-.card.card-statistic-1 .card-body, .card.card-statistic-2 .card-body {
-    font-size: 26px;
-    font-weight: 700;
-    color: #34395e;
-    padding-bottom: 0;
-}
-.card.card-statistic-1 .card-body, .card.card-statistic-2 .card-body {
-    padding-top: 0;
-}
-.card .card-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.card .card-header, .card .card-body, .card .card-footer {
-    background-color: transparent;
-    padding: 20px 25px;
-}
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem;
-}
-.card.card-statistic-1 .card-header h4 {
-    margin-bottom: 0;
-}
-.card.card-statistic-1 .card-header h4, .card.card-statistic-2 .card-header h4 {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .5px;
-}
-.card.card-statistic-1 .card-header h4, .card.card-statistic-2 .card-header h4 {
-    line-height: 1.2;
-    color: #98a6ad;
-}
-.card .card-header h4 {
-    font-size: 16px;
-    line-height: 28px;
-    color: #6777ef;
-    padding-right: 10px;
-    margin-bottom: 0;
-}
-.card.card-statistic-1 .card-icon .ion, .card.card-statistic-1 .card-icon .fas, .card.card-statistic-1 .card-icon .far, .card.card-statistic-1 .card-icon .fab, .card.card-statistic-1 .card-icon .fal, .card.card-statistic-2 .card-icon .ion, .card.card-statistic-2 .card-icon .fas, .card.card-statistic-2 .card-icon .far, .card.card-statistic-2 .card-icon .fab, .card.card-statistic-2 .card-icon .fal {
-    font-size: 22px;
-    color: #fff;
-}
-body {
-    background-color:#b9dede;
-}
+
     </style>
 </head>
 <body>
 
-<div class="container">
+
+<div class="container mt-5">
+
     <div class="row justify-content-center">
+        <div class="col-3">
+             <a style="text-decoration: none;"  href="{% url 'profile' %}" data-toggle="modal" data-target="#profile">
+            <div class="card">
+              <div class="card-body">
+                  <h2 class="text-center"><i class="far fa-address-card"></i></h2>
+                <h5 class="card-title text-center">Profile</h5>
+              </div>
+            </div><!--Card end-->
+             </a>
+        </div>
 
-         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="card card-statistic-1">
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h3>Profile</h3>
-                                </div>
-                                <div class="card-body">
-                                    <a href="{% url 'profile' %}">Profile</a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="card card-statistic-1">
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h3>Status</h3>
-                                </div>
-                                <div class="card-body">
-                                    <a href="{% url 'status' %}">Status</a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="card card-statistic-1">
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h3>Vacancy</h3>
-                                </div>
-                                <div class="card-body">
-                                    <a href="{% url 'vacancy' %}">Vacancy</a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+        <div class="col-3">
+             <a style="text-decoration: none;"  href="{% url 'status' %}">
+            <div class="card" >
+              <div class="card-body">
+                  <h2 class="text-center"><i class="fas fa-columns"></i></h2>
+                <h5 class="card-title text-center">Status</h5>
+              </div>
+            </div><!--Card end-->
+        </div>
+
+
+        <div class="col-3">
+            <a style="text-decoration: none;" href="{% url 'vacancy' %}">
+            <div class="card">
+              <div class="card-body">
+                  <h2 class="text-center"><i class="fas fa-users"></i></h2>
+                <h5 class="card-title text-center">Vacancy</h5>
+              </div>
+            </div><!--Card end-->
+           </a>
+        </div>
 
 
 
-    </div>
+    </div><!--row-->
+
 </div>
+
+
+<!--Profile-->
+<!-- Modal -->
+<div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <h1 class="text-center display-3"><i class="fas fa-user-circle"></i></h1>
+          <div class="body-text text-center">
+                  <h5>User Name : <span>Abir123</span></h5>
+                 <h5> Email : <span>abir@gmail.com</span></h5>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<!--Profile-->
 
 
 
