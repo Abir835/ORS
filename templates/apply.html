@@ -18,57 +18,63 @@
     <div class="container mt-3 d-flex justify-content-center">
         <div>
 
-                        <form id="logreg-forms" class="form-signup marginbtm shadow" method="post">
-
-
+                        <form id="logreg-forms" class="form-signup marginbtm shadow" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <h2 style="text-align:center;font-size:18px;padding:5px;"><b>APPLICATION FORM </b></h2>
 
                             <!-- New Registration Form section starts Here  -->
                             <input style="font-size:11px;" type="text" id="txt_username" class="form-control"
-                                name="userName" placeholder="Enter Preferred User Name" required="" autofocus=""><br>
+                                name="aid" placeholder="Enter  User ID" required="" autofocus=""><br>
+                            <input style="font-size:11px;" type="text" id="txt_username" class="form-control"
+                                name="userName" placeholder="Enter  User Name" required="" autofocus=""><br>
 
-                            <input style="font-size:11px;" type="text" class="form-control" name="title"
-                                placeholder="Phone Number" required="" autofocus=""><br>
+                            <input style="font-size:11px;" type="text" class="form-control"
+                                name='ephone' placeholder="Phone Number" required="" autofocus=""><br>
 
-                            <input style="font-size:11px;" type="email" id="pemail" class="form-control"
-                                name="pemail" placeholder="Email Address" required=""
+                            <input style="font-size:11px;" type="text" id="" class="form-control"
+                                name="eemail" placeholder="Email Address" required=""
                                 autofocus=""><br>
 
-                            <input style="font-size:11px;" type="email" id="pemail" class="form-control"
-                             name="pemail" placeholder="Past Experience" required=""
+                            <input style="font-size:11px;" type="text" id="" class="form-control"
+                             name="pexpreience" placeholder="Past Experience" required=""
                             autofocus=""><br>
 
-                            <input style="font-size:11px;" type="email" id="pemail" class="form-control"
-                             name="pemail" placeholder="Salary" required=""
+                            <input style="font-size:11px;" type="text" id="" class="form-control"
+                             name="esalary" placeholder="Expected Salary" required=""
                             autofocus=""><br>
 
-                            <input style="font-size:11px;" type="email" id="pemail" class="form-control"
-                            name="pemail" placeholder="University Name" required=""
+                            <input style="font-size:11px;" type="text" id="" class="form-control"
+                            name="uname" placeholder="University Name" required=""
                             autofocus=""><br>
 
-                            Notice Period:<select class="form-control" id="formGroupExampleInput" placeholder="Notice Period" name="co-authors-number" required>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                            Notice Period:
+                            <select class="form-control" id="formGroupExampleInput" placeholder="Notice Period" name="epriod" required>
+                                <option value="One Week">One Week</option>
+                                <option value="One Month">One Month</option>
+                                <option value="Six Months">Six Months</option>
+                                <option value="Anytime">Anytime</option>
                             </select> <br>
 
-                            <input style="font-size:11px;" type="email" id="pemail" class="form-control"
-                            name="pemail" placeholder="Position" required=""
+                            <input style="font-size:11px;" type="text" id="" class="form-control"
+                            name="eposition" placeholder="Position" required=""
                             autofocus=""><br>
 
-                           Cover Letter: <input style="font-size:11px;" type="file" id="pemail" class="form-control"
-                           name="pemail" placeholder="Cover Letter" required=""
+                           Cover Letter:
+                            <input style="font-size:11px;" type="file" id="" class="form-control"
+                           name="ecl" placeholder="Cover Letter" required=""
                            autofocus=""><br>
 
-                           CV: <input style="font-size:11px;" type="file" id="pemail" class="form-control"
-                           name="pemail" placeholder="Cover Letter" required=""
+                           CV: <input style="font-size:11px;" type="file" id="" class="form-control"
+                           name="ecv" placeholder="CV" required=""
                            autofocus=""><br>
                            
-                            <button name="sign-up" class="btn btn-primary btn-block" type="submit"> APPLY</button>
+                            <button name="sign-up" class="btn btn-primary btn-block" type="submit">Submit</button>
                             <br>
                             <hr>
                         </form>
+            {% if uploaded_file_url %}
+            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+            {% endif %}
         </div>
 
     </div>

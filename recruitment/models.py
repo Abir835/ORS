@@ -59,16 +59,16 @@ class WrittenExamPagedB(models.Model):
 
 class WrittenAnsDB(models.Model):
     examId = models.IntegerField(blank=None, null=True)
-    definition = models.TextField(max_length=500)
-    theory = models.TextField(max_length=500)
-    idTest = models.TextField(max_length=500)
-    math1 = models.TextField(max_length=500)
-    math2 = models.TextField(max_length=500)
-    math3 = models.TextField(max_length=500)
-    syntax1 = models.TextField(max_length=500)
-    syntax2 = models.TextField(max_length=500)
-    syntax3 = models.TextField(max_length=500)
-    syntax4 = models.TextField(max_length=500)
+    definition = models.CharField(max_length=500, default=None, null=True)
+    theory = models.CharField(max_length=500, default=None, null=True)
+    iqTest = models.CharField(max_length=500, default=None, null=True)
+    math1 = models.CharField(max_length=500, default=None, null=True)
+    math2 = models.TextField(max_length=500, default=None, null=True)
+    math3 = models.TextField(max_length=500, default=None, null=True)
+    syntax1 = models.TextField(max_length=500, default=None, null=True)
+    syntax2 = models.TextField(max_length=500, default=None, null=True)
+    syntax3 = models.TextField(max_length=500, default=None, null=True)
+    syntax4 = models.TextField(max_length=500, default=None, null=True)
 
 
 class DeptDB(models.Model):

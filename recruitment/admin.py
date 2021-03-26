@@ -33,7 +33,7 @@ class WrittenExamPagedBAdmin(admin.ModelAdmin):
 
 class WrittenAnsDBAdmin(admin.ModelAdmin):
     list_display = (
-        'examId', 'definition', 'theory', 'idTest', 'math1', 'math2', 'math3',
+        'examId', 'definition', 'theory', 'iqTest', 'math1', 'math2', 'math3',
         'syntax1', 'syntax2', 'syntax3', 'syntax4')
 
 

@@ -25,35 +25,13 @@
                   <th> :</th>
                   <th class="">Vacancy Position</th>
               </tr>
-
+              {% for datas in data %}
               <tr>
-                  <td class="">01</td>
+                  <td class="">{{ datas.vId }}</td>
                   <td> :</td>
-                  <td class=""><a href="{% url 'vacancy_details' %}">Senior Admin</a></td>
+                  <td class=""><a href="{% url 'vacancy_details' %}">{{ datas.vacancy }}</a></td>
               </tr>
-
-               <tr>
-                  <td class="">01</td>
-                  <td> :</td>
-                  <td class=""><a href="{% url 'vacancy_details' %}">Senior Admin</a></td>
-              </tr>
-
-               <tr>
-                  <td class="">01</td>
-                  <td> :</td>
-                  <td class=""><a href="{% url 'vacancy_details' %}">Senior Admin</a></td>
-              </tr>
-
-               <tr>
-                  <td class="">01</td>
-                  <td> :</td>
-                  <td class=""><a href="{% url 'vacancy_details' %}">Senior Admin</a></td>
-              </tr>
-
-
-
-
-
+              {% endfor %}
           </table>
 
        </div>
