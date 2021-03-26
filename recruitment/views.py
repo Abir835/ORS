@@ -77,6 +77,18 @@ def Vacancy_Details(request):
     return render(request, 'vacancy_details.html')
 
 
+def Application(request):
+    return render(request, 'applications.html')
+
+
+def See_Applicant(request):
+    return render(request, 'see_applicant.html')
+
+
+def Applicant_Details(request):
+    return render(request, 'applicant_details.html')
+
+
 def Apply(request):
     if request.method == 'POST':
         aid = request.POST.get('aid')

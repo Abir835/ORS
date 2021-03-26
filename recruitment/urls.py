@@ -17,5 +17,8 @@ urlpatterns = [
     path('vacancy_details/', views.Vacancy_Details, name='vacancy_details'),
     path('apply/', views.Apply, name='apply'),
     path('Written_exam/', views.Written_Exam, name='written_exam'),
+    path('application/', views.Application, name='application'),
+    path('see_applicant/', views.See_Applicant, name='see_applicant'),
+    path('applicant_details/', views.Applicant_Details, name='applicant_details'),
 
 ]
