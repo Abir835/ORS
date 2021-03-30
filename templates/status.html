@@ -17,74 +17,38 @@
 <body>
 
     <div class="container  mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Notification</h4>
-                            </div>
-                            <div class="card-body">
-                              <small>You are Selected</small>
-                            </div>
-                        </div>
-                    </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Written Exam Date</h4>
-                            </div>
-                            <div class="card-body">
-                                <small>2020-03-17</small>
-                            </div>
-                        </div>
-                    </div>
+        {% for message in messages %}
+            <p class="alert alert-{{ message.tags }} alert-dismissible">{{ message }}</p>
+        {% endfor %}
 
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4> Viva Date</h4>
-                            </div>
-                            <div class="card-body">
-                                <small>2020-03-17</small>
-                            </div>
-                        </div>
-                    </div>
-   
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Viva link</h4>
-                            </div>
-                            <div class="card-body">
-                             <a href="#">Link</a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-    
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4> Go to Exam page</h4>
-                            </div>
-                            <div class="card-body">
-                                <a href="{% url 'written_exam' %}">Exam Now</a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+        <table class="table table-bordered" id="">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th scope="col">Position</th>
+                <th scope="col">Company</th>
+                <th scope="col">Apply Date</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for application in applications %}
+
+                <tr>
+                    <td class="text-dark">{{ forloop.counter }}</td>
+                    <td class="text-dark">{{ application.position }}</td>
+                    <td class="text-dark">{{ application.position.vacancydetailsdb.CompanyName }}</td>
+                    <td class="text-dark">{{ application.apply_date }}</td>
+
+                    <td class="text-dark">{{ application.status }}</td>
+                </tr>
+
+            {% endfor %}
 
 
-   </div>
+            </tbody>
+        </table>
 
     </div>
 

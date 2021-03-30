@@ -27,9 +27,9 @@
               </tr>
               {% for datas in data %}
               <tr>
-                  <td class="">{{ datas.vId }}</td>
+                  <td class="">{{ datas.id }}</td>
                   <td> :</td>
-                  <td class=""><a href="{% url 'vacancy_details' %}">{{ datas.vacancy }}</a></td>
+                  <td class=""><a href="{% url 'vacancy_details' datas.id %}">{{ datas.vacancy }}</a></td>
               </tr>
               {% endfor %}
           </table>

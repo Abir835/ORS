@@ -17,31 +17,30 @@
 
     <div class="container mt-3 pb-5">
        <h6><b>Company Name</b></h6>
-       <p>Vacancy : Junior Soft. Engineer</p>
-          <ul>
-              <li>Details1</li>
-              <li>deails2</li>
-          </ul>
+       <p>Position Name : {{ object.vacancy.vacancy }}</p>
+       <p>Vacancy : {{ object.vacancyNum }}</p>
+
        <p>Job Responsibilities: </p>
        <ul>
-        <li>Details1</li>
-        <li>deails2</li>
+           {% for responsibility in responsibilities %}
+               <li>{{ responsibility.name }}</li>
+           {% endfor %}
        </ul>
-       <p>Employment Status: </p>
-       <p>Educational Requirements: </p>
-       <p>Experience Requirements: </p>
-       <p>Additional Requirements: </p>
-       <p>Job Location: </p>
-       <p>Salary: </p>
+       <p>Employment Status: {{ object.EmploymentStatus }}</p>
+       <p>Educational Requirements: {{ object.EducationalRequirements }} </p>
+       <p>Experience Requirements: {{ object.experience }} </p>
+       <p>Additional Requirements: {{ object.AdditionalRequirements }} </p>
+       <p>Job Location: {{ object.JobLocation }}</p>
+       <p>Salary: {{ object.salary }} </p>
         <hr>
        <div class="Application__section text-center">
               <h4>Read Before Apply</h4>
               <p>Only non-smokers should apply
                 Only short-listed candidates will be called for interview
                 Apply Procedure</p>
-           <a href="{% url 'apply' %}"><button class="btn btn-info col-3">Apply Online</button><br></a>
+           <a href="{% url 'apply' object.vacancy.id %}"><button class="btn btn-info col-3">Apply Online</button><br></a>
                 <small></small>
-           <h5>Last date: 2020-03-17</h5>
+           <h5>Last date: {{ object.lastDate }}</h5>
        </div>
 
     </div>

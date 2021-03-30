@@ -1,7 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-
 # Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class TextBoxDB(models.Model):
     notification = models.CharField(max_length=250)
@@ -10,96 +13,128 @@ class TextBoxDB(models.Model):
     vivaLik = models.CharField(max_length=250)
 
 
+class DeptDB(models.Model):
+    DeptName = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.DeptName
+
+
 class VacancyDB(models.Model):
-    vId = models.IntegerField(blank=None, null=True)
+    dept = models.ForeignKey(DeptDB, on_delete=models.SET_NULL, null=True, blank=True)
     vacancy = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.vacancy
+
+    @property
+    def get_applications(self):
+        return self.applydb_set.all()
+
+    @property
+    def get_selected_applicant(self):
+        return self.applydb_set.filter(written_link_sent=True)
+
+
+class JobResponsibilities(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class VacancyDetailsDB(models.Model):
+    vacancy = models.OneToOneField(VacancyDB, on_delete=models.SET_NULL, null=True, blank=True)
     CompanyName = models.CharField(max_length=50, null=True)
-    sl = models.IntegerField(blank=None, null=True)
     vacancyNum = models.IntegerField(blank=None, null=True)
-    position = models.CharField(max_length=100, null=True)
-    JobResponsibilities = models.CharField(max_length=250,null=True)
-    EmploymentStatus = models.TextField(max_length=500, null=True)
-    EducationalRequirements = models.TextField(max_length=500, null=True)
-    AdditionalRequirements = models.TextField(max_length=200, null=True)
+    JobResponsibilities = models.ManyToManyField(JobResponsibilities)
+    EmploymentStatus = models.TextField(null=True)
+    EducationalRequirements = models.TextField(null=True)
+    AdditionalRequirements = models.TextField(null=True)
     JobLocation = models.CharField(max_length=100, null=True)
     salary = models.IntegerField(blank=None, null=True)
+    experience = models.CharField(max_length=200, null=True, blank=True)
     lastDate = models.DateTimeField(default=None, null=True)
 
 
+# Creating VacancyDetailsDB when an User is created.
+@receiver(post_save, sender=VacancyDB)
+def create_vacancy_details(sender, instance, created, **kwargs):
+    if created:
+        VacancyDetailsDB.objects.create(vacancy=instance)
+
+
 class ApplyDB(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    position = models.ForeignKey(VacancyDB, on_delete=models.SET_NULL, null=True, blank=True)
     applicantID = models.IntegerField(blank=None, null=True)
-    name = models.CharField(max_length=25)
     phoneNumber = models.CharField(max_length=15)
-    email = models.EmailField(max_length=20, default=None, null=True)
     pastExperience = models.CharField(max_length=250, null=True)
     salary = models.CharField(max_length=100)
     university_Name = models.CharField(max_length=100)
     noticePeriod = models.CharField(max_length=50)
-    position = models.CharField(max_length=50)
     coverLatter = models.FileField(upload_to='CoverLater/')
     Cv = models.FileField(upload_to='Cv/')
 
+    invitation_sent = models.BooleanField(default=False)
+    written_link_sent = models.BooleanField(default=False)
+    viva_link_sent = models.BooleanField(default=False)
 
-class WrittenExamPagedB(models.Model):
-    qSl = models.IntegerField(blank=None, null=True)
-    label1 = models.CharField(max_length=100)
-    label2 = models.TextField(max_length=500)
-    label3 = models.TextField(max_length=500)
-    label4 = models.TextField(max_length=500)
-    label5 = models.TextField(max_length=500)
-    label6 = models.TextField(max_length=500)
-    label7 = models.TextField(max_length=500)
-    label8 = models.TextField(max_length=500)
-    label9 = models.TextField(max_length=500)
-    label10 = models.TextField(max_length=500)
-
-
-class WrittenAnsDB(models.Model):
-    examId = models.IntegerField(blank=None, null=True)
-    definition = models.CharField(max_length=500, default=None, null=True)
-    theory = models.CharField(max_length=500, default=None, null=True)
-    iqTest = models.CharField(max_length=500, default=None, null=True)
-    math1 = models.CharField(max_length=500, default=None, null=True)
-    math2 = models.TextField(max_length=500, default=None, null=True)
-    math3 = models.TextField(max_length=500, default=None, null=True)
-    syntax1 = models.TextField(max_length=500, default=None, null=True)
-    syntax2 = models.TextField(max_length=500, default=None, null=True)
-    syntax3 = models.TextField(max_length=500, default=None, null=True)
-    syntax4 = models.TextField(max_length=500, default=None, null=True)
-
-
-class DeptDB(models.Model):
-    DeptId = models.IntegerField(blank=None, null=True)
-    DeptName = models.CharField(max_length=50)
-
-
-class JobPositionDB(models.Model):
-    JobPId = models.IntegerField(blank=None, null=True)
-    JobPosition = models.TextField(max_length=500)
-
-
-class QDetail(models.Model):
-    DeptID = models.IntegerField(blank=None, null=True)
-    JobPID = models.IntegerField(blank=None, null=True)
-    JobPositions = models.TextField(max_length=500)
-    startTime = models.DateTimeField(default=None, null=True)
-    endTime = models.DateTimeField(default=None, null=True)
-
-
-class Category(models.Model):
-    labelName = models.CharField(max_length=20)
+    apply_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.labelName
+        return self.position.vacancy
+
+    @property
+    def status(self):
+        if self.written_link_sent is False and self.viva_link_sent is False:
+            current_status = "Pending"
+        if self.written_link_sent is True and self.viva_link_sent is False:
+            current_status = "Selected For Written"
+        if self.written_link_sent is True and self.viva_link_sent is True:
+            current_status = "Selected For Viva"
+        return current_status
 
 
-class QDetails(models.Model):
-    JobPiD = models.IntegerField(blank=None, null=True)
-    question = models.TextField(max_length=250)
-    categories = models.ManyToManyField('Category',)
+class Question(models.Model):
+    position = models.ForeignKey(VacancyDB, on_delete=models.SET_NULL, null=True, blank=True)
+    questionText = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.question
+        return str(self.questionText)
+
+    @property
+    def total_scripts_count(self):
+        return self.answer_set.values('user').distinct().count()
+
+
+class Answer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True, blank=True)
+    answer = models.TextField(null=True, blank=True)
+    time = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.answer
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
+    address = models.CharField(max_length=500, null=True, blank=True)
+    cell = models.CharField(max_length=20, null=True, blank=True)
+    university = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return '{}\'s Profile'.format(self.user.username)
+
+
+# Creating VacancyDetailsDB when an User is created.
+@receiver(post_save, sender=User)
+def create_user_information(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+class Viva(models.Model):
+    link = models.CharField(max_length=300, null=True, blank=True)
+    time = models.DateTimeField(null=True, blank=True)

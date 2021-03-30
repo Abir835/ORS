@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TextBoxDB, VacancyDB, VacancyDetailsDB, ApplyDB, WrittenExamPagedB, WrittenAnsDB, DeptDB, \
-    JobPositionDB, QDetail, Category, QDetails
+from .models import TextBoxDB, VacancyDB, VacancyDetailsDB, ApplyDB, DeptDB, \
+    JobResponsibilities, UserProfile, Question, Answer, Viva
 
 
 class TextBoxDBAdmin(admin.ModelAdmin):
@@ -10,61 +10,61 @@ class TextBoxDBAdmin(admin.ModelAdmin):
 
 
 class VacancyDBAdmin(admin.ModelAdmin):
-    list_display = ('vId', 'vacancy')
+    list_display = ('vacancy',)
+
+
+class JobResponsibilitiesAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 
 class VacancyDetailsDBAdmin(admin.ModelAdmin):
     list_display = (
-        'CompanyName', 'sl', 'vacancyNum', 'position', 'JobResponsibilities', 'EmploymentStatus', 'EducationalRequirements', 'AdditionalRequirements',
+        'CompanyName', 'vacancyNum',
         'JobLocation', 'salary', 'lastDate')
 
 
 class ApplyDBAdmin(admin.ModelAdmin):
     list_display = (
-        'applicantID', 'name', 'phoneNumber', 'email', 'pastExperience', 'salary', 'university_Name',
-        'noticePeriod', 'position', 'coverLatter', 'Cv')
-
-
-class WrittenExamPagedBAdmin(admin.ModelAdmin):
-    list_display = (
-        'qSl', 'label1', 'label2', 'label3', 'label4', 'label5', 'label6',
-        'label7', 'label8', 'label9', 'label10')
-
-
-class WrittenAnsDBAdmin(admin.ModelAdmin):
-    list_display = (
-        'examId', 'definition', 'theory', 'iqTest', 'math1', 'math2', 'math3',
-        'syntax1', 'syntax2', 'syntax3', 'syntax4')
+        'phoneNumber' , 'pastExperience', 'salary', 'university_Name',
+        'noticePeriod', 'position', 'coverLatter', 'Cv', 'apply_date')
 
 
 class DeptDBAdmin(admin.ModelAdmin):
-    list_display = ('DeptId', 'DeptName')
+    list_display = ('DeptName',)
 
 
-class JobPositionDBAdmin(admin.ModelAdmin):
-    list_display = ('JobPId', 'JobPosition')
+class AnswerDBAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'position', 'question', 'answer', 'time'
+    )
+
+    def position(self, obj):
+        return obj.question.position.vacancy
+    position.admin_order_field = 'question__position'
+    position.short_description = 'Position Name'
+    list_filter = ['user', 'question__position']
 
 
-class QDetailAdmin(admin.ModelAdmin):
-    list_display = ('DeptID', 'JobPID', 'JobPositions', 'startTime', 'endTime')
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = (
+        'position', 'questionText',
+    )
 
-
-class QDetailsAdmin(admin.ModelAdmin):
-    pass
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    pass
+    def position(self, obj):
+        return obj.position.vacancy
+    position.admin_order_field = 'position__vacancy'
+    position.short_description = 'Position Name'
+    list_filter = ['position__vacancy']
 
 
 admin.site.register(TextBoxDB, TextBoxDBAdmin)
 admin.site.register(VacancyDB, VacancyDBAdmin)
 admin.site.register(VacancyDetailsDB, VacancyDetailsDBAdmin)
 admin.site.register(ApplyDB, ApplyDBAdmin)
-admin.site.register(WrittenExamPagedB, WrittenExamPagedBAdmin)
-admin.site.register(WrittenAnsDB, WrittenAnsDBAdmin)
 admin.site.register(DeptDB, DeptDBAdmin)
-admin.site.register(JobPositionDB, JobPositionDBAdmin)
-admin.site.register(QDetail, QDetailAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(QDetails, QDetailsAdmin)
+admin.site.register(JobResponsibilities, JobResponsibilitiesAdmin)
+admin.site.register(UserProfile)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Answer, AnswerDBAdmin)
+admin.site.register(Viva)
+

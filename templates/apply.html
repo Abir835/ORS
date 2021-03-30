@@ -15,6 +15,10 @@
 </head>
 <body>
 
+    {% for message in messages %}
+        <p class="alert alert-{{ message.tags }} alert-dismissible">{{ message }}</p>
+    {% endfor %}
+
     <div class="container mt-3 d-flex justify-content-center">
         <div>
 
@@ -22,18 +26,8 @@
                             {% csrf_token %}
                             <h2 style="text-align:center;font-size:18px;padding:5px;"><b>APPLICATION FORM </b></h2>
 
-                            <!-- New Registration Form section starts Here  -->
-                            <input style="font-size:11px;" type="text" id="txt_username" class="form-control"
-                                name="aid" placeholder="Enter  User ID" required="" autofocus=""><br>
-                            <input style="font-size:11px;" type="text" id="txt_username" class="form-control"
-                                name="userName" placeholder="Enter  User Name" required="" autofocus=""><br>
-
                             <input style="font-size:11px;" type="text" class="form-control"
                                 name='ephone' placeholder="Phone Number" required="" autofocus=""><br>
-
-                            <input style="font-size:11px;" type="text" id="" class="form-control"
-                                name="eemail" placeholder="Email Address" required=""
-                                autofocus=""><br>
 
                             <input style="font-size:11px;" type="text" id="" class="form-control"
                              name="pexpreience" placeholder="Past Experience" required=""
@@ -54,10 +48,6 @@
                                 <option value="Six Months">Six Months</option>
                                 <option value="Anytime">Anytime</option>
                             </select> <br>
-
-                            <input style="font-size:11px;" type="text" id="" class="form-control"
-                            name="eposition" placeholder="Position" required=""
-                            autofocus=""><br>
 
                            Cover Letter:
                             <input style="font-size:11px;" type="file" id="" class="form-control"
