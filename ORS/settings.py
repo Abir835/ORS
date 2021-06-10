@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recruitment',
-    'whitenoise.runserver_nostatic'
 ]
 
 MIDDLEWARE = [
@@ -46,7 +45,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -137,4 +135,3 @@ EMAIL_HOST_USER = 'abirhasan.raj.bd@gmail.com'
 EMAIL_HOST_PASSWORD = 'kskpzcxbrzhimsbg'
 EMAIL_USE_TLS = True
 
-STATICFILES_STORAGE = 'whiteness.storage.CompressedManifestStaticFilesStorage'
