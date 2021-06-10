@@ -24,12 +24,15 @@
                   <th class="">Serial No</th>
                   <th> :</th>
                   <th class="">Vacancy Position</th>
+                  <th class="">Department</th>
               </tr>
               {% for datas in data %}
               <tr>
                   <td class="">{{ datas.id }}</td>
                   <td> :</td>
                   <td class=""><a href="{% url 'vacancy_details' datas.id %}">{{ datas.vacancy }}</a></td>
+                  <td class=""><p style="color: steelblue">{{ datas.dept }}</p></td>
+
               </tr>
               {% endfor %}
           </table>

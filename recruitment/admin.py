@@ -19,13 +19,13 @@ class JobResponsibilitiesAdmin(admin.ModelAdmin):
 
 class VacancyDetailsDBAdmin(admin.ModelAdmin):
     list_display = (
-        'CompanyName', 'vacancyNum',
+        'CompanyName', 'vacancy',
         'JobLocation', 'salary', 'lastDate')
 
 
 class ApplyDBAdmin(admin.ModelAdmin):
     list_display = (
-        'phoneNumber' , 'pastExperience', 'salary', 'university_Name',
+        'phoneNumber', 'pastExperience', 'salary', 'university_Name',
         'noticePeriod', 'position', 'coverLatter', 'Cv', 'apply_date')
 
 
@@ -35,11 +35,12 @@ class DeptDBAdmin(admin.ModelAdmin):
 
 class AnswerDBAdmin(admin.ModelAdmin):
     list_display = (
-        'user', 'position', 'question', 'answer', 'time'
+        'user', 'position', 'question', 'time'
     )
 
     def position(self, obj):
         return obj.question.position.vacancy
+
     position.admin_order_field = 'question__position'
     position.short_description = 'Position Name'
     list_filter = ['user', 'question__position']
@@ -52,6 +53,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
     def position(self, obj):
         return obj.position.vacancy
+
     position.admin_order_field = 'position__vacancy'
     position.short_description = 'Position Name'
     list_filter = ['position__vacancy']
@@ -67,4 +69,3 @@ admin.site.register(UserProfile)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerDBAdmin)
 admin.site.register(Viva)
-

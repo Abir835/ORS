@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -9,7 +10,7 @@
     <title>Home Page</title>
     <link rel="icon" href="{% static 'images/logo1.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -27,25 +28,44 @@
 <body>
     {#Navbar #}
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#" style="font-size:30px;"> <i class="fas fa-home"></i></a>
+  <a class="navbar-brand" href="{% url 'font_page'%}" style="font-size:30px;"> <i class="fas fa-home"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto header-item-text">
+
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'font_page' %}">Home</a>
       </li>
+       {% if request.user.is_authenticated %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+       </li>
+    {% endif %}
+
         <li class="nav-item">
         <a class="nav-link" href="#About">About</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#Contact">Contact</a>
       </li>
+
+        {% if request.user.is_authenticated %}
         <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+        {% else %}
+            <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
+        {% endif %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+             <a class="nav-link" style=" text-transform: uppercase;"><i class="fas fa-user-alt"></i> {{ request.user }}</a>
+          </li>
+    {% endif %}
     </ul>
   </div>
 </nav>
@@ -135,7 +155,7 @@
         <p style="font-size:14px;">4 Embankment Drive Road,Sector-10, Uttara Model Town, Dhaka-1230.</p>
 
         <p style="font-size:14px;"><b>Phone:</b> (88 05) 55111111-1, Mobile : +88 01711111111, 01711111112,</p>
-        <p style="font-size:14px;" class="float-right;"><b>Fax:</b> (880-1) 2222 1111, <b>Email :</b> abir@hmail.com</p>
+        <p style="font-size:14px;" class="float-right;"><b>Fax:</b> (880-1) 2222 1111, <b>Email :</b> abir@gmail.com</p>
     </div>
 
     <div class="credit text-center">

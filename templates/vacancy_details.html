@@ -16,9 +16,9 @@
 <body>
 
     <div class="container mt-3 pb-5">
-       <h6><b>Company Name</b></h6>
+       <h6><b>Company Name : {{ object.CompanyName }}</b></h6>
        <p>Position Name : {{ object.vacancy.vacancy }}</p>
-       <p>Vacancy : {{ object.vacancyNum }}</p>
+       <b><p>Vacancy : {{ object.vacancyNum }}</p></b>
 
        <p>Job Responsibilities: </p>
        <ul>
@@ -26,12 +26,12 @@
                <li>{{ responsibility.name }}</li>
            {% endfor %}
        </ul>
-       <p>Employment Status: {{ object.EmploymentStatus }}</p>
+       <b><p>Employment Status: {{ object.EmploymentStatus }}</p></b>
        <p>Educational Requirements: {{ object.EducationalRequirements }} </p>
        <p>Experience Requirements: {{ object.experience }} </p>
        <p>Additional Requirements: {{ object.AdditionalRequirements }} </p>
-       <p>Job Location: {{ object.JobLocation }}</p>
-       <p>Salary: {{ object.salary }} </p>
+       <b><p>Job Location: {{ object.JobLocation }}</p></b>
+       <b><p>Salary: {{ object.salary }} </p></b>
         <hr>
        <div class="Application__section text-center">
               <h4>Read Before Apply</h4>

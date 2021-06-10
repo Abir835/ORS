@@ -68,7 +68,6 @@ def Registration(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                email1 = form.cleaned_data.get('email')
                 messages.success(request, 'Account was created.' + user)
                 return redirect('login')
 
@@ -87,7 +86,7 @@ def LogIn(request):
             if user is not None:
                 login(request, user)
 
-                return redirect('dashboard')
+                return redirect('font_page')
             else:
                 messages.info(request, 'Username or Password is incorrect')
         context = {}
@@ -132,7 +131,6 @@ def Profile(request, user_id):
 
 
 def Status(request):
-
     my_applications = ApplyDB.objects.filter(user=request.user)
 
     context = {
@@ -247,7 +245,7 @@ class SendExamLink(View):
 
                     {url}
                     
-                    Note: Exam will be end at 11 A.M. If you submit after 11 A.M., Your answer script will not be accepted.
+                    Note: Exam will be end at 11 A.M. If you submit after 12 P.M., Your answer script will not be accepted.
 
                     Thank You. 
 
@@ -256,7 +254,6 @@ class SendExamLink(View):
             apply_obj.save()
 
         send_mail(subject, message_text, EMAIL_HOST_USER, [user_obj.email], fail_silently=False)
-
 
         if action == 'invitation':
             messages.success(request, 'Invitation Sent Successfully. ')
