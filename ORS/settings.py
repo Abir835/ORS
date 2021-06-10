@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recruitment',
+    'whitenoise.runserver_nostatic'
 ]
 
 MIDDLEWARE = [
@@ -45,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -79,6 +81,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': env.db() if env.str("DATABASE_URL", default='') else env.db('SQLITE_URL',
+#                                                                            default='sqlite:///db.sqlite3')
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -131,3 +137,4 @@ EMAIL_HOST_USER = 'abirhasan.raj.bd@gmail.com'
 EMAIL_HOST_PASSWORD = 'kskpzcxbrzhimsbg'
 EMAIL_USE_TLS = True
 
+STATICFILES_STORAGE = 'whiteness.storage.CompressedManifestStaticFilesStorage'
